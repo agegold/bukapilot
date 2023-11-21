@@ -106,6 +106,7 @@ class CarInterfaceBase(ABC):
     ret.longitudinalActuatorDelayUpperBound = 0.15
     ret.steerLimitTimer = 1.0
     ret.speedControlled = False
+    ret.isTallCar = False
     return ret
 
   @abstractmethod

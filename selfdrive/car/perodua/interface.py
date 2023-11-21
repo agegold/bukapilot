@@ -164,6 +164,7 @@ class CarInterface(CarInterfaceBase):
       ret.longitudinalActuatorDelayLowerBound = 0.42
       ret.longitudinalActuatorDelayUpperBound = 0.60
       ret.speedControlled = True
+      ret.isTallCar = True
 
     elif candidate == CAR.VIOS:
       ret.wheelbase = 2.620

@@ -60,7 +60,7 @@ STOP_DISTANCE = 6.8
 T_FOLLOW_CHILL = 1.7
 T_FOLLOW_NORMAL = 1.4
 T_FOLLOW_AGGRO = 1.1
-T_FOLLOW_DANGER = 0.8
+T_FOLLOW_V_AGGRO = 0.6
 
 def get_desired_tf(set_distance=SetDistance.normal):
   if set_distance == SetDistance.aggresive:
@@ -70,7 +70,7 @@ def get_desired_tf(set_distance=SetDistance.normal):
   elif set_distance == SetDistance.chill:
     return T_FOLLOW_CHILL
   elif set_distance == SetDistance.experimental:
-    return T_FOLLOW_DANGER
+    return T_FOLLOW_V_AGGRO
   else:
     return T_FOLLOW_NORMAL
 

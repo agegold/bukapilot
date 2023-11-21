@@ -9,8 +9,10 @@ def compute_set_distance(state):
     return 2
   elif state == SetDistance.normal:
     return 1
-  else:
+  elif state == SetDistance.chill:
     return 0
+  else:
+    return 2
 
 def lkc_checksum(addr,dat):
   return ( addr + len(dat) + 1 + 1 + sum(dat)) & 0xFF

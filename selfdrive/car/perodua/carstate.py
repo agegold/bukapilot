@@ -152,6 +152,9 @@ class CarState(CarStateBase):
       distance_val = int(cp.vl["ACC_CMD_HUD"]['FOLLOW_DISTANCE'])
       ret.cruiseState.setDistance = self.parse_set_distance(self.set_distance_values.get(distance_val, None))
 
+      if CP.isTallCar:
+        ret.cruiseState.setDistance += 1
+
       # set speed logic
       # todo: check if the logic needs to be this complicated
 

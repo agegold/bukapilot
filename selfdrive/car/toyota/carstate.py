@@ -111,6 +111,10 @@ class CarState(CarStateBase):
       self.distance_btn = 1 if cp_cam.vl["ACC_CONTROL"]["DISTANCE"] == 1 else 0
       self.raw_distance = int(cp.vl["PCM_CRUISE_SM"]['DISTANCE_LINES'])
       ret.cruiseState.setDistance = self.parse_set_distance(self.set_distance_values.get(self.raw_distance, None))
+
+      # Close up the distance one more level for tall cars
+      if CP.isTallCar:
+        ret.cruiseState.setDistance += 1
     else:
       ret.cruiseState.setDistance = car.CarState.CruiseState.SetDistance.normal
 

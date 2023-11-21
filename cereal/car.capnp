@@ -482,6 +482,7 @@ struct CarParams {
 
   wheelSpeedFactor @63 :Float32; # Multiplier on wheels speeds to computer actual speeds
   speedControlled @66: Bool; # To identify cars that are speed controlled but accel controlled brakes
+  isTallCar @67: Bool; # Any vehicle that is taller than 1650mm in height
 
   struct SafetyConfig {
     safetyModel @0 :SafetyModel;
