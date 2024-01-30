@@ -93,6 +93,36 @@ class CarInterface(CarInterfaceBase):
     if self.CS.hand_on_wheel_warning and self.CS.is_icc_on:
       events.add(EventName.protonHandOnWheelWarning)
 
+    self.minSteerSpeed = 8
+    if ret.vEgo < (self.minSteerSpeed) and self.minSteerSpeed > 1.:
+      self.low_speed_alert = True
+    if ret.vEgo > (self.minSteerSpeed + .1):
+      self.low_speed_alert = False
+    if ret.vEgo >= (self.minSteerSpeed) and not ret.cruiseState.enabled and not self.CS.operational_speed and not self.CS.prevEnAboveSteerSpeed:
+      self.CS.operational_speed = True
+
+    if ret.cruiseState.enabled and ret.vEgo > self.minSteerSpeed:
+      self.CS.prevEnAboveSteerSpeed = True
+
+    if ret.vEgo < self.minSteerSpeed:
+      self.CS.prevEnAboveSteerSpeed = False
+
+    if self.CS.counter >= 100 and ret.vEgo <= (self.minSteerSpeed):
+      self.CS.operational_speed = False
+      self.CS.counter = 0
+
+    if self.CS.operational_speed:
+      self.CS.counter += 1
+
+    if self.CS.counter > 0 and self.CS.counter < 100:
+      self.eventAboveSteerSpeed = True
+    else:
+      self.eventAboveSteerSpeed = False
+
+    if self.eventAboveSteerSpeed:
+      events.add(car.CarEvent.EventName.aboveSteerSpeed)
+    if self.low_speed_alert:
+      events.add(car.CarEvent.EventName.belowSteerSpeed)
     ret.events = events.to_msg()
 
     self.CS.out = ret.as_reader()

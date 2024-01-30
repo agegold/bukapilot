@@ -31,7 +31,9 @@ class CarState(CarStateBase):
     self.stock_ldp = 0
     self.stock_ldp_cmd = 0
     self.steer_dir = 0
-
+    self.operational_speed = False
+    self.counter = 0
+    self.prevEnAboveSteerSpeed = False
   def update(self, cp):
     ret = car.CarState.new_message()
 
